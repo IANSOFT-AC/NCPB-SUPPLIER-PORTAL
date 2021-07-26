@@ -37,10 +37,10 @@ $config = [
             'useFileTransport' => false,
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
-                'host' => 'mail.softeboard.com',
-                'username' => 'rck.support@softeboard.com',
-                'password' => '@Rck2021#*',
-                'port' => '587',
+                'host' => env('SMTP_HOST'),
+                'username' => env('SMTP_USERNAME'),
+                'password' => env('SMTP_PASSWORD'),
+                'port' => env('SMTP_PORT'),
                 /*'encryption' => 'tls',
                 'streamOptions' => [ 'ssl' =>
                     [

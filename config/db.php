@@ -4,9 +4,9 @@ return [
    
             'class' => 'yii\db\Connection',
             'driverName' => 'sqlsrv',
-            'dsn' => 'sqlsrv:server=APPLICATION;database=NCPB',
-            'username' => 'sa',
-            'password' => 'Ncpb@admin',
+            'dsn' => 'sqlsrv:server='.env('DB_SERVER').';database='.env('DB'),
+            'username' => env('DB_USER'),
+            'password' => env('DB_PASSWORD'),
             'charset' => 'utf8',
         
     
