@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use yii\filters\AccessControl;
+use yii\filters\ContentNegotiator;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
@@ -18,6 +19,8 @@ use app\models\VendorLoginForm;
 use app\models\VendorSignupForm;
 use app\models\PasswordResetRequestForm;
 use app\models\ResendVerificationEmailForm;
+
+use yii\helpers\Html;
 
 class SiteController extends Controller
 {
@@ -47,8 +50,20 @@ class SiteController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'logout' => ['post'],
+                    'download' => ['post'],
                 ],
             ],
+            'contentNegotiator' =>[
+                'class' => ContentNegotiator::class,
+                'only' => [
+                'list'
+                ],
+                'formatParam' => '_format',
+                'formats' => [
+                    'application/json' => Response::FORMAT_JSON,
+                    //'application/xml' => Response::FORMAT_XML,
+                ],
+            ]
         ];
     }
 
@@ -82,6 +97,19 @@ class SiteController extends Controller
 
         return $this->render('index');
     }
+
+     public function actionTenders(){
+
+        if(Yii::$app->user->isGuest)
+        {
+             $this->layout="external";
+        }
+       
+
+        return $this->render('tenders');
+
+    }
+
 
 /*Created Supplier Profle*/
    public function actionCreate(){
@@ -482,6 +510,83 @@ class SiteController extends Controller
         $service = Yii::$app->params['ServiceName'][$service];
         $result = \Yii::$app->navhelper->getData($service, []);
         return Yii::$app->navhelper->refactorArray($result,$from,$to);
+    }
+
+     public function actionList(){
+
+        $service = Yii::$app->params['ServiceName']['AdvertisedTenderList'];
+        $filter = [
+            //'Vendor_No' => Yii::$app->user->identity->vendor->Generated_Vendor_No,
+        ];
+        
+        $results = \Yii::$app->navhelper->getData($service,$filter);
+        // Yii::$app->recruitment->printrr($results);
+        $result = [];
+        foreach($results as $item){
+
+            if(empty($item->No))
+            {
+                continue;
+            }
+
+
+            $ApprovalLink = $updateLink = $ViewLink =  '';
+            // $ViewLink = Html::a('<i class="fas fa-eye"></i>',['view','No'=> $item->Appraisal_Code ],['title' => 'View Appriasal Card..','class'=>'btn btn-outline-primary btn-xs']);
+            $downloadLink = Html::a('<i class="fas fa-download"></i> Download ',['download'],[
+                'title' => 'Download Tender Documents',
+                'class'=>'btn update btn-outline-success btn-xs',
+                'data' => [
+                    'method' => 'POST',
+                    'params' => [
+                        'path'=> $item->Attachment_File_Path
+                    ],
+                ]
+            ]);
+            
+
+            $result['data'][] = [
+                'Key' => $item->Key,
+                'No' => $item->No,
+                'Title' => !empty($item->Title)?$item->Title:'Not Set',
+                'Supplier_Category' => !empty($item->Supplier_Category)?$item->Supplier_Category:'Not Set ',
+                'Tender_Opening_Date' => !empty($item->Tender_Opening_Date)?$item->Tender_Opening_Date:'',
+                'Status' => !empty($item->Status)?$item->Status:'',
+                'Actions' => $downloadLink ,
+
+            ];
+        }
+
+        return $result;
+    }
+
+
+    public function actionDownload(){
+        if(Yii::$app->user->isGuest){
+            $this->layout = 'external';
+        }
+        $base = basename(Yii::$app->request->post('path'));
+        /* $ctx = Yii::$app->recruitment->connectWithAppOnlyToken(
+             Yii::$app->params['sharepointUrl'],
+             Yii::$app->params['clientID'],
+             Yii::$app->params['clientSecret']
+         );*/
+
+
+       /* $ctx = Yii::$app->recruitment->connectWithUserCredentials(Yii::$app->params['sharepointUrl'],Yii::$app->params['sharepointUsername'],Yii::$app->params['sharepointPassword']);
+        $fileUrl = '/'.Yii::$app->params['library'].'/'.$base;
+        $targetFilePath = './qualifications/download.pdf';
+        $resource = Yii::$app->recruitment->downloadFile($ctx,$fileUrl,$targetFilePath);*/
+
+
+       // $path = Yii::getAlias('@frontend').'\\web\\qualifications\\'.$base;
+        $path =  str_replace('/', '\\', Yii::$app->request->post('path')); // Normalize the damn path
+        $resource = base64_encode(@file_get_contents($path));
+
+        return $this->render('read',[
+            'content' => $resource
+        ]);
+
+
     }
 
 }

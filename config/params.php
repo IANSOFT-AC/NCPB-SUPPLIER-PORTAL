@@ -182,6 +182,8 @@ return [
         'ShipmentMethods' => 'ShipmentMethods', //11
         'PaymentTerms' => 'PaymentTerms', //4
         'VendorBankAccountList' => 'VendorBankAccountList', //426
+        'VendorQuote' => 'VendorQuote', // 67037
+        'AdvertisedTenderList' => 'AdvertisedTenderList', //67013
 
 
        

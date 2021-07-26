@@ -38,6 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <div class="form-group">
                     <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+					<?= Html::a('I have an account',['login'],['class' => 'btn btn-outline-success', 'name' => 'signup-button']) ?>
                 </div>
 
             <?php ActiveForm::end(); ?>

@@ -20,10 +20,10 @@ AdminlteAsset::register($this);
 
 $webroot = Yii::getAlias(@$webroot);
 $absoluteUrl = \yii\helpers\Url::home(true);
-$vendor = (!Yii::$app->user->isGuest && Yii::$app->user->identity->VendorId)?Yii::$app->user->identity->vendor[0]:[];
+$vendor = (!Yii::$app->user->isGuest && Yii::$app->user->identity->VendorId)?Yii::$app->user->identity->vendor:[];
 
 
-// Yii::$app->recruitment->printrr(Yii::$app->user->identity->{'VendorId'});
+ // Yii::$app->recruitment->printrr(Yii::$app->user->identity->vendor);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -241,33 +241,46 @@ $vendor = (!Yii::$app->user->isGuest && Yii::$app->user->identity->VendorId)?Yii
 
 
                         <!--Payroll reports -->
-                         <li class="nav-item has-treeview <?= currentCtrl(['payslip','p9'])?'menu-open':'' ?>">
-                            <a href="#" class="nav-link <?= currentCtrl(['payslip','p9'])?'active':'' ?>">
-                                <i class="nav-icon fa fa-file-invoice-dollar"></i>
-                                <p>
-                                    Reports
-                                    <i class="fas fa-angle-left right"></i>
-                                    <!--<span class="badge badge-info right">6</span>-->
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="<?= $absoluteUrl ?>payslip" class="nav-link <?= currentaction('payslip','index')?'active':'' ?>">
-                                        <i class="fa fa-check-square nav-icon"></i>
-                                        <p>Invoices</p>
+                                 <li class="nav-item has-treeview <?= currentCtrl(['quotations'])?'menu-open':'' ?>">
+                                    <a href="#" class="nav-link <?= currentCtrl(['quotations'])?'active':'' ?>">
+                                        <i class="nav-icon fa fa-file-invoice-dollar"></i>
+                                        <p>
+                                            Quotations
+                                            <i class="fas fa-angle-left right"></i>
+                                            <!--<span class="badge badge-info right">6</span>-->
+                                        </p>
                                     </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="<?= $absoluteUrl ?>quotations" class="nav-link <?= currentaction('quotations','index')?'active':'' ?>">
+                                                <i class="fa fa-check-square nav-icon"></i>
+                                                <p>Requests for Quotations</p>
+                                            </a>
+                                        </li>  
+
+                                    </ul>
                                 </li>
 
-                                <li class="nav-item">
-                                    <a href="<?= $absoluteUrl ?>p9" class="nav-link <?= currentaction('p9','index')?'active':'' ?>">
-                                        <i class="fa fa-check-square nav-icon"></i>
-                                        <p>Contracts </p>
+                         <!--Payroll reports -->
+                                 <li class="nav-item has-treeview <?= currentCtrl(['site'])?'menu-open':'' ?>">
+                                    <a href="#" class="nav-link <?= currentCtrl(['site'])?'active':'' ?>">
+                                        <i class="nav-icon fa fa-file-invoice-dollar"></i>
+                                        <p>
+                                            Tenders
+                                            <i class="fas fa-angle-left right"></i>
+                                            <!--<span class="badge badge-info right">6</span>-->
+                                        </p>
                                     </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="<?= $absoluteUrl ?>site/tenders" class="nav-link <?= currentaction('site','tenders')?'active':'' ?>">
+                                                <i class="fa fa-check-square nav-icon"></i>
+                                                <p>Advertised Tenders</p>
+                                            </a>
+                                        </li>  
+
+                                    </ul>
                                 </li>
-
-                            </ul>
-                        </li>
-
 
 
 

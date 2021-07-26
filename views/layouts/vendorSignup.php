@@ -40,7 +40,7 @@ $absoluteUrl = \yii\helpers\Url::home(true);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body>
+<body class="bg-light">
 <?php $this->beginBody() ?>
 
 <nav class="navbar navbar-expand-md bg-success navbar-dark fixed-top ">
@@ -100,13 +100,16 @@ $absoluteUrl = \yii\helpers\Url::home(true);
 
 
 </body>
-<footer class="footer">
-    <strong>Copyright &copy; <span style="color: #02A14E" title="NATION CEREALS AND PRODUCE BOARD">NCPB</span> <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?>.</strong>
-    All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-        <b style="color: darkblue"><?= Yii::signature() ?></b>
-    </div>
-
+<footer class="text-center text-lg-start bg-light text-muted ">
+	<section class="d-flex justify-content-center justify-content-lg-between p-5 border-top">
+		<div class="me-5">
+			<strong>Copyright &copy; <span style="color: #02A14E" title="NATION CEREALS AND PRODUCE BOARD">NCPB</span> <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?>.</strong>
+		All rights reserved.
+		</div>
+		<div class="d-none d-lg-block">
+			<b style="color: darkblue"><?= Yii::signature() ?></b>
+		</div>
+	</section>
 </footer>
 
 <?php $this->endBody() ?>

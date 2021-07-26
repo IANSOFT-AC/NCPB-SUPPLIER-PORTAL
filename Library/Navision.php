@@ -112,6 +112,42 @@ class Navision extends Component
     }
 
 
+    // Get Record Id from Key
+
+      public function getRecordID($credentials, $soapWsdl,$Key)
+    {
+        $client = $this->createClient($credentials, $soapWsdl);
+        try {
+            $result = $client->GetRecIdFromKey(['Key' => $Key]);
+            return $result;
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+
+    // ReaD By RecordId
+
+
+     public function readByRecID($credentials, $soapWsdl,$Key)
+    {
+
+        $RecordId = $this->getRecordID($credentials, $soapWsdl, $Key);
+
+        //Yii::$app->recruitment->printrr($RecordId);
+
+        $client = $this->createClient($credentials, $soapWsdl);
+        try {
+            $result = $client->ReadByRecId(['recId' => $RecordId->GetRecIdFromKey_Result]);
+            return $result;
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+
+
+
    // General Code Unit Invocation method
 
      public function Codeunit($credentials, $soapWsdl, $Entry,$method)
@@ -196,8 +232,6 @@ class Navision extends Component
  **/
 class NTLMSoapClient extends \SoapClient
 {
-
-
     function __doRequest($request, $location, $action, $version, $one_way = NULL)
     {
         $headers = array(
@@ -209,9 +243,6 @@ class NTLMSoapClient extends \SoapClient
         );
 
         $this->__last_request_headers = $headers;
-
-
-
         $ch = curl_init($location);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
@@ -223,8 +254,6 @@ class NTLMSoapClient extends \SoapClient
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
         $response = @curl_exec($ch);
-
-
 
         return $response;
 

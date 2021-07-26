@@ -68,6 +68,15 @@ $config = [
             'rules' => [
             ],
         ],
+        'assetManager' => [
+            'appendTimestamp' => true,
+            'bundles' => [
+                'yii\web\JqueryAsset' => [
+                    'sourcePath' => null,
+                    'js' => ['/plugins/jquery/jquery.js'],
+                ]
+            ]
+        ],
         'recruitment' => [
             'class' => 'app\Library\Recruitment'
         ],

@@ -227,11 +227,7 @@ class Vuser extends ActiveRecord implements IdentityInterface
 
     public function getVendor(){
         $service = Yii::$app->params['ServiceName']['SupplierCard'];
-        $filter = [
-            'No' => Yii::$app->user->identity->{'VendorId'},
-        ];
-
-        $employee = \Yii::$app->navhelper->getData($service,$filter);
+        $employee = \Yii::$app->navhelper->findOne($service,'No',Yii::$app->user->identity->{'VendorId'});
         return $employee;
     }
 

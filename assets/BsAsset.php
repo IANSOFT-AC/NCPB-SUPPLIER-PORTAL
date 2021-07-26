@@ -21,15 +21,19 @@ class BsAsset extends AssetBundle
         'plugins/fontawesome-free/css/all.min.css',
         'https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css',
        // '//cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css',
+        'plugins/datatables-bs4/css/dataTables.bootstrap4.css',
+        'https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css',
         
-        'css/steps.css',
-        'css/validation.css'
+       // 'css/steps.css',
+       // 'css/validation.css'
 
     ];
     public $js = [
 
         //'//code.jquery.com/jquery-3.5.1.slim.min.js',
-        '//cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js'
+        '//cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js',
+        'https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js',
+        'https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js ',
 
 
        
