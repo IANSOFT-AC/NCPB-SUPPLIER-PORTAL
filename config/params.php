@@ -184,6 +184,8 @@ return [
         'VendorBankAccountList' => 'VendorBankAccountList', //426
         'VendorQuote' => 'VendorQuote', // 67037
         'AdvertisedTenderList' => 'AdvertisedTenderList', //67013
+        'SupplierAttachments' => 'SupplierAttachments', //66063
+        'SupplierAttachmentTypes' => 'SupplierAttachmentTypes', //66062
 
 
        
@@ -191,7 +193,6 @@ return [
     'QualificationsMimeTypes' => [
 
         'application/pdf',
-
     ],
     'Microsoft' => [
         'application/msword',
@@ -223,6 +224,8 @@ return [
         'application/rtf',
         'application/octet-stream'
     ],
+
+    'maxUploadFiles' => 1,
 
     'Documents' => [
         'Purchase Requisition' => 1,

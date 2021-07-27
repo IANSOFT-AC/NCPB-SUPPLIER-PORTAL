@@ -19,6 +19,11 @@ use app\models\VendorLoginForm;
 use app\models\VendorSignupForm;
 use app\models\PasswordResetRequestForm;
 use app\models\ResendVerificationEmailForm;
+use app\models\ResetPasswordForm;
+use app\models\Attachment;
+
+use yii\web\UploadedFile;
+
 
 use yii\helpers\Html;
 
@@ -108,6 +113,62 @@ class SiteController extends Controller
 
         return $this->render('tenders');
 
+    }
+
+
+    public function actionUploads()
+    {
+        $service = Yii::$app->params['ServiceName']['SupplierAttachmentTypes'];
+        $uploads = Yii::$app->navhelper->getData($service);
+
+        $model = new Attachment();
+
+        return $this->render('uploads', [
+            'uploads' => $uploads,
+            'model' => $model
+        ]);
+    }
+
+
+    public function actionAttach()
+    {
+        $model = new Attachment();
+        $model->Name = Yii::$app->request->get('NAME');
+        $model->Key = (Yii::$app->request->get('Key'))?Yii::$app->request->get('Key'):null;
+        $service = Yii::$app->params['ServiceName']['SupplierAttachments'];
+        if(Yii::$app->request->post() && Yii::$app->navhelper->loadpost(Yii::$app->request->post()['Attachment'],$model)){
+           
+
+             if(!empty($_FILES['Attachment']['name']['attachmentfile'])){
+                $model->attachmentfile = UploadedFile::getInstance($model, 'attachmentfile');
+                $model->upload();
+            }
+            $result = Yii::$app->navhelper->postData($service,$model);
+
+            if(is_object($result)){
+
+                Yii::$app->session->setFlash('success','Document Added Successfully',true);
+                return $this->redirect(['uploads']);
+
+            }else{
+
+                Yii::$app->session->setFlash('error','Error Adding Document: '.$result,true);
+                return $this->redirect(['uploads']);
+
+            }
+
+        }//End Saving experience
+
+        if(Yii::$app->request->isAjax){
+            return $this->renderAjax('createupload', [
+                'model' => $model
+
+            ]);
+        }
+
+        return $this->render('createupload',[
+            'model' => $model,
+        ]);
     }
 
 
@@ -398,6 +459,7 @@ class SiteController extends Controller
      */
     public function actionResetPassword($token)
     {
+        $this->layout = 'vendorLogin';
         try {
             $model = new ResetPasswordForm($token);
         } catch (InvalidArgumentException $e) {
@@ -580,13 +642,27 @@ class SiteController extends Controller
 
        // $path = Yii::getAlias('@frontend').'\\web\\qualifications\\'.$base;
         $path =  str_replace('/', '\\', Yii::$app->request->post('path')); // Normalize the damn path
-        $resource = base64_encode(@file_get_contents($path));
-
+        $resource = base64_encode(file_get_contents($path));
+		//\Yii::$app->recruitment->printrr($resource);
         return $this->render('read',[
             'content' => $resource
         ]);
 
 
+    }
+
+    public function actionRead()
+    {
+        $model = new Attachment();
+        $fileKey = Yii::$app->request->post('Key');
+
+        $content = $model->readAttachment($fileKey);
+
+        // Yii::$app->recruitment->printrr($content);
+
+        return $this->render('readDocument',[
+            'content' => $content
+        ]);
     }
 
 }

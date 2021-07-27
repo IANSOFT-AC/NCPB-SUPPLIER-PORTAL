@@ -14,7 +14,7 @@ $this->title = Yii::$app->params['generalTitle'].' - File Reader';
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <?= \yii\helpers\Html::a('Go Back',['tenders'],['class' => ' back btn btn-outline-primary push-right']) ?>
+                    <?= \yii\helpers\Html::a('Go Back',['uploads'],['class' => ' back btn btn-outline-primary push-right']) ?>
                 </div>
             </div>
         </div>
@@ -27,7 +27,7 @@ $this->title = Yii::$app->params['generalTitle'].' - File Reader';
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Tender Document</h3>
+                    <h3 class="card-title">Supplier Document</h3>
 
                 </div>
                 <div class="card-body" >

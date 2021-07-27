@@ -33,3 +33,7 @@ tests/_support/_generated
 /.vagrant
 
 .env
+
+/uploads
+
+/svgs

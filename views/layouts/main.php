@@ -82,14 +82,14 @@ $vendor = (!Yii::$app->user->isGuest && Yii::$app->user->identity->VendorId)?Yii
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <!-- Messages Dropdown Menu -->
-                <li class="nav-item dropdown">
+                <!--<li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
                         <i class="far fa-comments"></i>
                         <span class="badge badge-danger navbar-badge">3</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
+                            <!-- Message Start --
                             <div class="media">
                                 <img src="<?= $webroot ?>/dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
                                 <div class="media-body">
@@ -101,11 +101,11 @@ $vendor = (!Yii::$app->user->isGuest && Yii::$app->user->identity->VendorId)?Yii
                                     <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
                                 </div>
                             </div>
-                            <!-- Message End -->
+                            <!-- Message End --
                         </a>
                         <div class="dropdown-divider"></div>
                         <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
+                            <!-- Message Start --
                             <div class="media">
                                 <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
                                 <div class="media-body">
@@ -117,11 +117,11 @@ $vendor = (!Yii::$app->user->isGuest && Yii::$app->user->identity->VendorId)?Yii
                                     <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
                                 </div>
                             </div>
-                            <!-- Message End -->
+                            <!-- Message End --
                         </a>
                         <div class="dropdown-divider"></div>
                         <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
+                            <!-- Message Start --
                             <div class="media">
                                 <img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
                                 <div class="media-body">
@@ -133,12 +133,12 @@ $vendor = (!Yii::$app->user->isGuest && Yii::$app->user->identity->VendorId)?Yii
                                     <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
                                 </div>
                             </div>
-                            <!-- Message End -->
+                            <!-- Message End --
                         </a>
                         <div class="dropdown-divider"></div>
                         <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
                     </div>
-                </li>
+                </li>-->
                 <!-- Notifications Dropdown Menu -->
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
@@ -193,11 +193,11 @@ $vendor = (!Yii::$app->user->isGuest && Yii::$app->user->identity->VendorId)?Yii
 
                         <div class="dropdown-divider"></div>
 
-                         <?= Html::a('<i class="fas fa-address-book"></i> Contacts', $absoluteUrl.'site/staff',['class'=> 'dropdown-item']); ?>
+                         <?= Html::a('<i class="fas fa-file-pdf"></i> Supplier Documents', $absoluteUrl.'site/uploads',['class'=> 'dropdown-item']); ?>
 
                         <div class="dropdown-divider"></div>
 
-                        <?= Html::a('<i class="fas fa-address-book"></i> Surveys', $absoluteUrl.'poll',['class'=> 'dropdown-item']); ?>
+                        <?php Html::a('<i class="fas fa-address-book"></i> Surveys', $absoluteUrl.'poll',['class'=> 'dropdown-item']); ?>
 
                     </div>
                 </li>
@@ -220,7 +220,7 @@ $vendor = (!Yii::$app->user->isGuest && Yii::$app->user->identity->VendorId)?Yii
             </a>
 
             <!-- Sidebar -->
-            <?php if(Yii::$app->user->identity->VendorId): ?>
+            <?php if(!Yii::$app->user->isGuest &&   Yii::$app->user->identity->VendorId): ?>
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">

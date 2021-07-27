@@ -267,6 +267,36 @@ if(Yii::$app->session->hasFlash('success')){
 
             </div>
         </div>
+		/* Supplier Uploads */
+		<div class="card card-success">
+            <div class="card-header">
+                <h3 class="card-title">Supplier Uploads</h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+
+                <div class="row">
+                    <div class=" row col-md-12">
+                        <div class="col-md-6">
+                            <?= $form->field($model, 'Location_Code')->dropDownList($locations,['prompt' => 'Select ...']) ?>
+                           
+
+                        </div>
+                        <div class="col-md-6">
+                           
+                            <?= $form->field($model, 'Shipment_Method_Code')->dropDownList($ShipmentMethods,['prompt' => 'Select ...']) ?>
+                            
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
 
         <div class="form-group">
                     <?= Html::submitButton('Save Profile', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>

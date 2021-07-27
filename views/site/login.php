@@ -12,6 +12,10 @@ $this->params['breadcrumbs'][] = $this->title;
 if(Yii::$app->session->hasFlash('error')){
     print '<div class="alert alert-danger">'.Yii::$app->session->getFlash('error').'</div>';
 }
+
+if(Yii::$app->session->hasFlash('success')){
+    print '<div class="alert alert-success">'.Yii::$app->session->getFlash('success').'</div>';
+}
 ?>
 
 

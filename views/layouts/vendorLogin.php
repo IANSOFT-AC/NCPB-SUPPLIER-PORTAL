@@ -78,7 +78,7 @@ $absoluteUrl = \yii\helpers\Url::home(true);
 <section class="signup bg-light my-5 p-5 text-center">
     <div class="container ">
 
-        <p class="display-4 py-3">Fill out below form to login.</p>
+        <p class="display-4 py-3 lead"><?= Yii::$app->controller->action->id == 'reset-password'?'Fill out below form to Reset your Password':'Fill out below form to login.' ?></p>
          <div class="row">
             <div class="col-md-5 d-none d-md-block">
                 
